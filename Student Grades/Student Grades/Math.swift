@@ -16,16 +16,19 @@ class Math: Subject {
     private let testsGrades: [Double]
     private let finalGrade: Double
     
-    func getGrade() -> Int {
-        var grade = 0.0
-        
-        return Int(grade)
+    func getGrade() -> Double {
+        var quizzAverage = 0.0
+        for quizzesGrade in quizzesGrades {
+            quizzAverage += quizzesGrade
+        }
+        quizzAverage /= Double(quizzesGrades.count)
+        return (quizzAverage * QUIZZESVALUE) + (testsGrades[0] * TESTSVALUE) + (testsGrades[1] * TESTSVALUE) + (finalGrade * FINALVALUE)
     }
     
-    init(firstName: String, lastName: String, subject: Subject.Subjects, quizzesGrades: [Double], testsGrades: [Double], finalGrade: Double) {
+    init(firstName: String, lastName: String, quizzesGrades: [Double], testsGrades: [Double], finalGrade: Double) {
         self.quizzesGrades = quizzesGrades
         self.testsGrades = testsGrades
         self.finalGrade = finalGrade
-        super.init(firstName: firstName, lastName: lastName, subject: subject)
+        super.init(firstName: firstName, lastName: lastName, subject: .Math)
     }
 }

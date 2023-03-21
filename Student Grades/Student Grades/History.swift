@@ -18,17 +18,15 @@ class History: Subject {
     private let midtermGrade: Double
     private let finalGrade: Double
     
-    func getGrade() -> Int {
-        var grade = 0.0
-        
-        return Int(grade)
+    func getGrade() -> Double {
+        return (attendanceGrade * ATTENDANCEVALUE) + (projectGrade * PROJECTVALUE) + (midtermGrade * MIDTERMVALUE) + (finalGrade * FINALVALUE)
     }
     
-    init(firstName: String, lastName: String, subject: Subject.Subjects, attendanceGrade: Double, projectGrade: Double, midtermGrade: Double, finalGrade: Double) {
+    init(firstName: String, lastName: String, attendanceGrade: Double, projectGrade: Double, midtermGrade: Double, finalGrade: Double) {
         self.attendanceGrade = attendanceGrade
         self.projectGrade = projectGrade
         self.midtermGrade = midtermGrade
         self.finalGrade = finalGrade
-        super.init(firstName: firstName, lastName: lastName, subject: subject)
+        super.init(firstName: firstName, lastName: lastName, subject: .History)
     }
 }

@@ -16,16 +16,14 @@ class English: Subject {
     private let midtermGrade: Double
     private let finalGrade: Double
     
-    func getGrade() -> Int {
-        var grade = 0.0
-        
-        return Int(grade)
+    func getGrade() -> Double {
+        return (paperGrade * PAPERVALUE) + (midtermGrade * MIDTERMVALUE) + (finalGrade * FINALVALUE)
     }
     
-    init(firstName: String, lastName: String, subject: Subject.Subjects, paperGrade: Double, midtermGrade: Double, finalGrade: Double) {
+    init(firstName: String, lastName: String, paperGrade: Double, midtermGrade: Double, finalGrade: Double) {
         self.paperGrade = paperGrade
         self.midtermGrade = midtermGrade
         self.finalGrade = finalGrade
-        super.init(firstName: firstName, lastName: lastName, subject: subject)   
+        super.init(firstName: firstName, lastName: lastName, subject: .English)   
     }
 }
