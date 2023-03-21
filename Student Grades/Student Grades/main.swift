@@ -65,7 +65,33 @@ outerloop: while true {
             }
             lines.remove(at: 0)
         }
+        let header = "Student                                   Final   Final   Letter\nName                                      Exam    Avg     Grade\n----------------------------------------------------------------\n"
+        var newContent = ""
+        var gradeDistribution = [0,0,0,0,0]
+        newContent.append("Student Grade Summary\n")
+        newContent.append("---------------------\n\n")
+        newContent.append("ENGLISH CLASS\n\n")
+        newContent.append(header)
+        //Print the English class content
         
+        newContent.append("\n\n")
+        newContent.append("HISTORY CLASS\n\n")
+        newContent.append(header)
+        //Print the History class content
+        
+        newContent.append("\n\n")
+        newContent.append("MATH CLASS\n\n")
+        newContent.append(header)
+        //Print the Math class content
+        
+        newContent.append("\n\n")
+        newContent.append("OVERALL GRADE DISTRIBUTION\n\n")
+        newContent.append("A:   \(gradeDistribution[0])\n")
+        newContent.append("B:   \(gradeDistribution[1])\n")
+        newContent.append("C:   \(gradeDistribution[2])\n")
+        newContent.append("D:   \(gradeDistribution[3])\n")
+        newContent.append("F:   \(gradeDistribution[4])\n")
+        print(newContent)
     } else {
         print("Error. File does not meet requirements. Please re-enter:")
         continue
