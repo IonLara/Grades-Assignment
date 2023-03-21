@@ -10,6 +10,7 @@ import Foundation
 outerloop: while true {
     var fileContent = ""
     var outputFile = ""
+    var students: [Subject] = []
     while true {
         print("Please enter the name of Input file:")
         if let input = readLine() {
@@ -35,12 +36,40 @@ outerloop: while true {
                 continue
             }
         } else {
-            "Invalid output. Please re-enter:"
+            print("Invalid output. Please re-enter:")
             continue
         }
     }
-    
-    
+    var lines = fileContent.components(separatedBy: "\n")
+    if let numOfStudents = Int(lines[0]) {
+        lines.remove(at: 0)
+        for _ in 0..<numOfStudents {
+            var names = lines[0].components(separatedBy: ", ")
+            
+            lines.remove(at: 0)
+            
+            let gradeString = lines[0].components(separatedBy: " ")
+            var grades : [Double] = []
+            for j in 1..<gradeString.count {
+                if let grade = Double(gradeString[j]) {
+                    grades.append(grade)
+                }
+            }
+            
+            if lines[0].contains("English") {
+                students.append(English(firstName: names[1], lastName: names[0], paperGrade: grades[0], midtermGrade: grades[1], finalGrade: grades[2]))
+            } else if lines[0].contains("History") {
+                students.append(History(firstName: names[1], lastName: names[0], attendanceGrade: grades[0], projectGrade: grades[1], midtermGrade: grades[2], finalGrade: grades[3]))
+            } else { //Math
+                students.append(Math(firstName: names[1], lastName: names[0], quizzesGrades: [grades[0], grades[1], grades[2], grades[3], grades[4]], testsGrades: [grades[5], grades[6]], finalGrade: grades[7]))
+            }
+            lines.remove(at: 0)
+        }
+        
+    } else {
+        print("Error. File does not meet requirements. Please re-enter:")
+        continue
+    }
 }
 ///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/Student\ Grades/Student\ Grades/sample.in
 ///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/Student\ Grades/Student\ Grades/sample.out
