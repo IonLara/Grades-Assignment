@@ -8,13 +8,13 @@
 import Foundation
 
 outerloop: while true {
-    
+    var fileContent = ""
+    var outputFile = ""
     while true {
         print("Please enter the name of Input file:")
         if let input = readLine() {
-            print(input)
             if let content = try? String(contentsOfFile: input.replacingOccurrences(of: "\\", with: "")) {
-                print(content)
+                fileContent = content
                 break
             } else {
                 print("Invalid file. Please re-enter:")
@@ -27,12 +27,23 @@ outerloop: while true {
     while true {
         print("Please enter the name of the Output file:")
         if let output = readLine() {
-            
+            if FileManager.default.fileExists(atPath: output.replacingOccurrences(of: "\\", with: "")) {
+                outputFile = output.replacingOccurrences(of: "\\", with: "")
+                break
+            } else {
+                print("File does not exist. Please re-enter:")
+                continue
+            }
+        } else {
+            "Invalid output. Please re-enter:"
+            continue
         }
     }
     
     
 }
+///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/Student\ Grades/Student\ Grades/sample.in
+///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/Student\ Grades/Student\ Grades/sample.out
 
 //// How to read a file?
 //let filename = "sample.in"
