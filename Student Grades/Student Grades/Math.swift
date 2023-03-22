@@ -8,23 +8,23 @@
 import Foundation
 
 class Math: Subject {
-    private let QUIZZESVALUE = 0.15
-    private let TESTSVALUE = 0.25
-    private let FINALVALUE = 0.35
+    private let QUIZZESVALUE = 0.15 //Value of quizzes average
+    private let TESTSVALUE = 0.25 //Value of each test
+    private let FINALVALUE = 0.35 //Value of final exam
     
-    private let quizzesGrades: [Double]
-    private let testsGrades: [Double]
-    private let finalGrade: Double
+    private let quizzesGrades: [Double] //Array with each quizzes grades
+    private let testsGrades: [Double] //Array with both tests grades
+    private let finalGrade: Double //Final exam's grade
     
-    override func getGrade() -> (Double, Double) {
-        var quizzAverage = 0.0
+    override func getGrade() -> (Double, Double) { //Override function to return respective grades
+        var quizzAverage = 0.0 //Variable for quizz average
         for quizzesGrade in quizzesGrades {
-            quizzAverage += quizzesGrade
+            quizzAverage += quizzesGrade //Add quiz result to average
         }
-        quizzAverage /= Double(quizzesGrades.count)
+        quizzAverage /= Double(quizzesGrades.count) //Get average by dividing by number of quizzes
         return (finalGrade, (quizzAverage * QUIZZESVALUE) + (testsGrades[0] * TESTSVALUE) + (testsGrades[1] * TESTSVALUE) + (finalGrade * FINALVALUE))
     }
-    
+    //Initializer for subclass
     init(firstName: String, lastName: String, quizzesGrades: [Double], testsGrades: [Double], finalGrade: Double) {
         self.quizzesGrades = quizzesGrades
         self.testsGrades = testsGrades
