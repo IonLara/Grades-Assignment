@@ -16,8 +16,8 @@ class English: Subject {
     private let midtermGrade: Double
     private let finalGrade: Double
     
-    func getGrade() -> Double {
-        return (paperGrade * PAPERVALUE) + (midtermGrade * MIDTERMVALUE) + (finalGrade * FINALVALUE)
+    override func getGrade() -> (finalExam: Double, finalGrade: Double) {
+        return (finalGrade,(paperGrade * PAPERVALUE) + (midtermGrade * MIDTERMVALUE) + (finalGrade * FINALVALUE))
     }
     
     init(firstName: String, lastName: String, paperGrade: Double, midtermGrade: Double, finalGrade: Double) {

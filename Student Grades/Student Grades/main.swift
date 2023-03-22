@@ -44,7 +44,7 @@ outerloop: while true {
     if let numOfStudents = Int(lines[0]) {
         lines.remove(at: 0)
         for _ in 0..<numOfStudents {
-            var names = lines[0].components(separatedBy: ", ")
+            let names = lines[0].components(separatedBy: ", ")
             
             lines.remove(at: 0)
             
@@ -73,17 +73,42 @@ outerloop: while true {
         newContent.append("ENGLISH CLASS\n\n")
         newContent.append(header)
         //Print the English class content
-        
+        for student in students {
+            if student.subject == .English {
+                newContent.append("\(student.description)\n")
+            }
+            let tempLetter = student.getLetter()
+            switch tempLetter {
+            case "A":
+                gradeDistribution[0] += 1
+            case "B":
+                gradeDistribution[1] += 1
+            case "C":
+                gradeDistribution[2] += 1
+            case "D":
+                gradeDistribution[3] += 1
+            default:
+                gradeDistribution[4] += 1
+            }
+        }
         newContent.append("\n\n")
         newContent.append("HISTORY CLASS\n\n")
         newContent.append(header)
         //Print the History class content
-        
+        for student in students {
+            if student.subject == .History {
+                newContent.append("\(student.description)\n")
+            }
+        }
         newContent.append("\n\n")
         newContent.append("MATH CLASS\n\n")
         newContent.append(header)
         //Print the Math class content
-        
+        for student in students {
+            if student.subject == .Math {
+                newContent.append("\(student.description)\n")
+            }
+        }
         newContent.append("\n\n")
         newContent.append("OVERALL GRADE DISTRIBUTION\n\n")
         newContent.append("A:   \(gradeDistribution[0])\n")
@@ -91,32 +116,18 @@ outerloop: while true {
         newContent.append("C:   \(gradeDistribution[2])\n")
         newContent.append("D:   \(gradeDistribution[3])\n")
         newContent.append("F:   \(gradeDistribution[4])\n")
+        students.sort(by: <)
         print(newContent)
+        do {
+            try newContent.write(to: URL(fileURLWithPath: outputFile), atomically: false, encoding: .utf8)
+            print("Succesfully wrote into \(outputFile)")
+        } catch {
+            print(error.localizedDescription)
+        }
     } else {
         print("Error. File does not meet requirements. Please re-enter:")
         continue
     }
 }
 ///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/Student\ Grades/Student\ Grades/sample.in
-///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/Student\ Grades/Student\ Grades/sample.out
-
-//// How to read a file?
-//let filename = "sample.in"
-//if let contents = try? String(contentsOfFile: "/Users/park/Desktop/Assignment5/Assignment5/\(filename)") {
-//  print(contents)
-//}
-//
-//// How to write into a file?
-//let outputFilename = "sample.out"
-//let outputString = "Hello, World!"
-//if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//
-//  let fileURL = dir.appending(path: outputFilename)
-//  do {
-//    try outputString.write(to: fileURL, atomically: false, encoding: .utf8)
-//    print("Sucessfully wrote into \(fileURL.absoluteString)")
-//  } catch {
-//    print(error.localizedDescription)
-//  }
-//}
-
+///Users/ionsebastianrodriguezlara/Documents/Homework/Grades-Assignment/done.out

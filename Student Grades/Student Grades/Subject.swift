@@ -7,14 +7,24 @@
 
 import Foundation
 
-class Subject: Comparable {
+class Subject: Comparable, CustomStringConvertible {
     private let firstName: String
     private let lastName: String
-    private let subject: Subjects
-    enum Subjects: Int {
-        case English = 1
-        case Math = 2
-        case History = 3
+    let subject: Subjects
+    enum Subjects {
+        case English
+        case Math
+        case History
+    }
+    
+    var description: String {
+        let names = String("\(firstName) \(lastName)").padding(toLength: 42, withPad: " ", startingAt: 0)
+        let grades = getGrade()
+        let finalExam = String("\(Int(grades.finalExam))").padding(toLength: 8, withPad: " ", startingAt: 0)
+        let finalGrade = String(format: "%.2f",grades.finalGrade).padding(toLength: 8, withPad: " ", startingAt: 0)
+        var letterGrade = getLetter()
+        
+        return "\(names)\(finalExam)\(finalGrade)\(letterGrade)"
     }
     
     init(firstName: String, lastName: String, subject: Subjects) {
@@ -23,8 +33,27 @@ class Subject: Comparable {
         self.subject = subject
     }
     
+    func getLetter() -> String {
+        switch getGrade().finalGrade {
+        case 90...100:
+            return "A"
+        case 80..<90:
+            return "B"
+        case 70..<80:
+            return "C"
+        case 60..<70:
+            return "D"
+        default:
+            return "F"
+        }
+    }
+    
+    func getGrade() -> (finalExam: Double, finalGrade: Double){
+        (100, 100)
+    }
+    
     static func <(lhs: Subject, rhs: Subject) -> Bool {
-        lhs.lastName < rhs.lastName && lhs.subject.rawValue < rhs.subject.rawValue
+        lhs.lastName < rhs.lastName
     }
     static func ==(lhs: Subject, rhs: Subject) -> Bool {
         lhs.lastName == rhs.lastName && lhs.firstName == rhs.firstName && lhs.subject == rhs.subject

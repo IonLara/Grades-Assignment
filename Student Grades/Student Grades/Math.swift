@@ -16,13 +16,13 @@ class Math: Subject {
     private let testsGrades: [Double]
     private let finalGrade: Double
     
-    func getGrade() -> Double {
+    override func getGrade() -> (Double, Double) {
         var quizzAverage = 0.0
         for quizzesGrade in quizzesGrades {
             quizzAverage += quizzesGrade
         }
         quizzAverage /= Double(quizzesGrades.count)
-        return (quizzAverage * QUIZZESVALUE) + (testsGrades[0] * TESTSVALUE) + (testsGrades[1] * TESTSVALUE) + (finalGrade * FINALVALUE)
+        return (finalGrade, (quizzAverage * QUIZZESVALUE) + (testsGrades[0] * TESTSVALUE) + (testsGrades[1] * TESTSVALUE) + (finalGrade * FINALVALUE))
     }
     
     init(firstName: String, lastName: String, quizzesGrades: [Double], testsGrades: [Double], finalGrade: Double) {

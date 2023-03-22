@@ -18,8 +18,8 @@ class History: Subject {
     private let midtermGrade: Double
     private let finalGrade: Double
     
-    func getGrade() -> Double {
-        return (attendanceGrade * ATTENDANCEVALUE) + (projectGrade * PROJECTVALUE) + (midtermGrade * MIDTERMVALUE) + (finalGrade * FINALVALUE)
+    override func getGrade() -> (Double, Double) {
+        return (finalGrade, (attendanceGrade * ATTENDANCEVALUE) + (projectGrade * PROJECTVALUE) + (midtermGrade * MIDTERMVALUE) + (finalGrade * FINALVALUE))
     }
     
     init(firstName: String, lastName: String, attendanceGrade: Double, projectGrade: Double, midtermGrade: Double, finalGrade: Double) {
