@@ -77,6 +77,11 @@ outerloop: while true { //The main loop that gets the user input to obtain the f
         var newContent = ""
         //An array to save how many students got each letter grade
         var gradeDistribution = [0,0,0,0,0] //0 = A, 1 = B, 2 = C ...
+        //Variables to store the info of each subject's students
+        var englishStudents = ""
+        var historyStudents = ""
+        var mathStudents = ""
+        
         //Add the information at the top
         newContent.append("Student Grade Summary\n")
         newContent.append("---------------------\n\n") //Division line
@@ -84,11 +89,18 @@ outerloop: while true { //The main loop that gets the user input to obtain the f
         newContent.append("ENGLISH CLASS\n\n")
         newContent.append(header)
         students.sort(by: <) //We sort the students alphabetically
-        //Add the English class content
-        for student in students { //These for loops could have been optimized by saving strings for each subject, but it's 2AM and I'm tired, sorry.
-            if student.subject == .English { //Add the description of the student if they belong to the English class
-                newContent.append("\(student.description)\n")
+        
+        //We get the different parts by appending each student description to their respective subject
+        for student in students {
+            switch student.subject {
+            case .English:
+                englishStudents.append("\(student.description)\n")
+            case .History:
+                historyStudents.append("\(student.description)\n")
+            default:
+                mathStudents.append("\(student.description)\n")
             }
+            
             //For each student we get their letter grade in this first loop.
             let tempLetter = student.getLetter()
             switch tempLetter { //Deppending the letter grade we add to their respective counters
@@ -104,25 +116,19 @@ outerloop: while true { //The main loop that gets the user input to obtain the f
                 gradeDistribution[4] += 1
             }
         }
+        //Add the English class content
+        newContent.append(englishStudents)
         newContent.append("\n\n") //Space after section
         //History Section
         newContent.append("HISTORY CLASS\n\n")
         newContent.append(header)
         //Add the History class content
-        for student in students {
-            if student.subject == .History { //Add the description of the student if they belong to the History class
-                newContent.append("\(student.description)\n")
-            }
-        }
+        newContent.append(historyStudents)
         newContent.append("\n\n") //Space after section
         newContent.append("MATH CLASS\n\n")
         newContent.append(header)
         //Add the Math class content
-        for student in students {
-            if student.subject == .Math { //Add the description of the student if they belong to the Math class
-                newContent.append("\(student.description)\n")
-            }
-        }
+        newContent.append(mathStudents)
         newContent.append("\n\n") //Space after section
         //Section for the count of the different letter grades
         newContent.append("OVERALL GRADE DISTRIBUTION\n\n")
